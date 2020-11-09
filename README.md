@@ -7,10 +7,10 @@ You can move robot between points which are created fter clicking on the fab.
 
 https://github.com/Rongix/ros_navigation_command_app
 
-<img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-155431.jpg" width="75%" height="75%"> <img src="https://github.com/Rongix/ros_navigation_command_app/blob/master/Screenshot_20200825-155355.jpg" width="17.8%" height="17.8%"> 
+<img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-155431.jpg" width="75%" height="75%"> <img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-155355.jpg" width="17.8%" height="17.8%"> 
 
 ### Controller page
-<img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-152332.jpg"  width="75%" height="75%">  <img src="https://github.com/Rongix/ros_navigation_command_app/blob/master/Screenshot_20200825-152025.jpg" width="17.8%" height="17.8%"> 
+<img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-152332.jpg"  width="75%" height="75%">  <img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200825-152025.jpg" width="17.8%" height="17.8%"> 
 
 ### Chat page
 Chat page provides communication with Dialogflow Agent.
