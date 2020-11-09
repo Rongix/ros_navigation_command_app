@@ -2,6 +2,10 @@
 Application for controlling ROS robot with voice commands, sending goals on map or remote controll with virtual joystick
 29.03.2020
 
+Check out youtube video showcasing app (PL + ENG subtitles):
+
+[![YouTube video here](https://img.youtube.com/vi/RIz-qJ3_qvo/hqdefault.jpg)](https://www.youtube.com/watch?v=RIz-qJ3_qvo "YouTube video here")
+
 ### Map page
 You can move robot between points which are created fter clicking on the fab. 
 
