@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/models/Waypoint.dart';
 import 'package:chatapp/providers/RosProvider.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
@@ -90,8 +91,10 @@ class _WaypointDialogState extends State<WaypointDialog> {
               child: Icon(_isEditMode ? Icons.create : Icons.add)),
           SizedBox(width: 8),
           _isEditMode
-              ? Text('Edytuj znacznik', style: TextStyle(color: textColor))
-              : Text('Dodaj nowy znacznik', style: TextStyle(color: textColor)),
+              ? Text(S?.of(context)?.creatorEdit ?? "",
+                  style: TextStyle(color: textColor))
+              : Text(S?.of(context)?.creatorAddNew ?? "",
+                  style: TextStyle(color: textColor)),
         ],
       ),
       content: Theme(
@@ -119,11 +122,11 @@ class _WaypointDialogState extends State<WaypointDialog> {
                             style: TextStyle(color: textColor),
                             controller: _nameController,
                             decoration: InputDecoration(
-                                labelText: "Nazwa",
+                                labelText: S?.of(context)?.creatorName ?? "",
                                 contentPadding:
                                     const EdgeInsets.fromLTRB(5, 5, 48, 5))),
                         IconButton(
-                          tooltip: 'Wylosuj nazwę',
+                          tooltip: S?.of(context)?.tooltipRandom ?? "",
                           icon: Icon(
                             MdiIcons.dice6,
                             size: 20,
@@ -172,10 +175,12 @@ class _WaypointDialogState extends State<WaypointDialog> {
                           children: [
                             Tooltip(
                                 message:
-                                    'Aktualne położenie robota (Kliknij by odświeżyć)',
+                                    S?.of(context)?.tooltipCurrentLocation ??
+                                        "",
                                 child: Icon(MdiIcons.earthBox)),
                             Tooltip(
-                                message: 'Ręczne koordynaty',
+                                message:
+                                    S?.of(context)?.tooltipCoordinates ?? "",
                                 child: Icon(MdiIcons.numeric)),
                             // Tooltip(
                             //     message: 'Przeciągnij znacznik później',
@@ -202,6 +207,7 @@ class _WaypointDialogState extends State<WaypointDialog> {
                       onColorChanged: (color) => _waypointColor = color,
                       pickerAreaBorderRadius:
                           BorderRadius.all(Radius.circular(2)),
+                      hueLabel: S?.of(context)?.creatorHue ?? "",
                     ),
                   ]),
             )),
@@ -211,7 +217,8 @@ class _WaypointDialogState extends State<WaypointDialog> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text("Anuluj", style: TextStyle(color: textColor))),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel,
+                style: TextStyle(color: textColor))),
         FlatButton(
             onPressed: () {
               var waypoint = Waypoint(
@@ -227,7 +234,7 @@ class _WaypointDialogState extends State<WaypointDialog> {
                       .addToWaypoints(waypoint));
             },
             child: Text(
-              "Zapisz",
+              MaterialLocalizations.of(context).saveButtonLabel,
               style: TextStyle(color: textColor),
             )),
       ],

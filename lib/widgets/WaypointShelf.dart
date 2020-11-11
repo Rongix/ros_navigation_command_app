@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/models/Waypoint.dart';
 import 'package:chatapp/providers/ChatInfoProvider.dart';
 import 'package:chatapp/providers/RosProvider.dart';
@@ -94,7 +95,7 @@ class WaypointShelf extends StatelessWidget {
                             ),
                             ListTile(
                               leading: Icon(Icons.edit),
-                              title: Text('Edytuj'),
+                              title: Text(S?.of(context)?.creatorEdit ?? ""),
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -106,7 +107,8 @@ class WaypointShelf extends StatelessWidget {
                             ),
                             ListTile(
                               leading: Icon(Icons.delete),
-                              title: Text('Usuń'),
+                              title: Text(MaterialLocalizations.of(context)
+                                  .deleteButtonTooltip),
                               onTap: () {
                                 Navigator.of(context).pop(
                                   Provider.of<SettingsProvider>(context,

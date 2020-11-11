@@ -14,11 +14,13 @@ class ColorPickerModified extends StatefulWidget {
   final BorderRadius pickerAreaBorderRadius;
   final ValueChanged<Color> onColorChanged;
   final Color textColor;
+  final String hueLabel;
 
   const ColorPickerModified({
     @required this.pickerColor,
     @required this.onColorChanged,
     @required this.textColor,
+    @required this.hueLabel,
     this.width: 300.0,
     this.height: 200.0,
     this.pickerAreaBorderRadius: const BorderRadius.all(Radius.zero),
@@ -102,7 +104,7 @@ class _ColorPickerModifiedState extends State<ColorPickerModified> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 25.0),
                                     child: Text(
-                                      'BARWA',
+                                      widget.hueLabel,
                                       style: Theme.of(context)
                                           .textTheme
                                           .overline

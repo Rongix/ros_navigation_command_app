@@ -1,12 +1,12 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/screens/ChatPage.dart';
 import 'package:chatapp/screens/ControllerPage.dart';
 import 'package:chatapp/screens/MapPage.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppStateProvider extends ChangeNotifier {
-  int _activePageIndex = 0;
+  var _activePageIndex = 0;
   static const _appPages = [ChatPage(), ControllerPage(), MapPage()];
-  static const _appPagesNames = ['Czat', 'Sterowanie', 'Mapa'];
 
   var _navigationBarPageController =
       PageController(initialPage: 0, keepPage: true);
@@ -25,13 +25,8 @@ class AppStateProvider extends ChangeNotifier {
     }
   }
 
-  String getCurrentPageName() {
-    return _appPagesNames[_activePageIndex];
-  }
-
   int get activePageIndex => _activePageIndex;
   PageController get navigationBarPageController =>
       _navigationBarPageController;
   List<Widget> get appPages => _appPages;
-  List<String> get appPagesNames => _appPagesNames;
 }

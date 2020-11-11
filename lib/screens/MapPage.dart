@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/providers/RosProvider.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
 import 'package:chatapp/widgets/MapPainter.dart';
@@ -68,7 +69,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                   builder: (ctx, settingsProvider, child) => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Czekam na obraz mapy",
+                            Text(S?.of(context)?.pageMapInfoTitle,
                                 style: Theme.of(context).textTheme.subtitle1,
                                 textAlign: TextAlign.center),
                             Text('${settingsProvider.topicMap}',
@@ -103,7 +104,7 @@ class _MapPageState extends State<MapPage> with TickerProviderStateMixin {
                     backgroundColor:
                         Theme.of(context).chipTheme.backgroundColor,
                     heroTag: null,
-                    tooltip: 'Utwórz nowy znacznik lokalizacyjny',
+                    tooltip: S?.of(context)?.pageMapButtonFloating,
                     onPressed: () {
                       showDialog(
                           context: context, builder: (_) => WaypointDialog());

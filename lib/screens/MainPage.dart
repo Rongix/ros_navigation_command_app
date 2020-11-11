@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/providers/AppStateProvider.dart';
 import 'package:chatapp/providers/RosProvider.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
@@ -8,11 +9,20 @@ import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'ChatPage.dart';
+import 'ControllerPage.dart';
+import 'MapPage.dart';
+
 class MainPage extends StatelessWidget {
-  const MainPage({Key key}) : super(key: key);
+  var appPages = [ChatPage(), ControllerPage(), MapPage()];
 
   @override
   Widget build(BuildContext context) {
+    var appPagesNames = [
+      S?.of(context)?.pageChatTitle ?? "",
+      S?.of(context)?.pageControllerTitle ?? "",
+      S?.of(context)?.pageMapTitle ?? ""
+    ];
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,
@@ -32,7 +42,8 @@ class MainPage extends StatelessWidget {
                   : 40,
               title: Consumer<AppStateProvider>(
                 builder: (context, myType, child) => Text(
-                    Provider.of<AppStateProvider>(context).getCurrentPageName(),
+                    appPagesNames[
+                        Provider.of<AppStateProvider>(context).activePageIndex],
                     style: TextStyle(
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.black54
@@ -45,7 +56,7 @@ class MainPage extends StatelessWidget {
                     : SizedBox(),
 
                 IconButton(
-                  tooltip: "Odśwież połączenie",
+                  tooltip: S?.of(context)?.tooltipRefreshConnection ?? "",
                   icon: Icon(MdiIcons.refresh,
                       // size: 30,
                       color: Theme.of(context).brightness == Brightness.light
@@ -58,7 +69,7 @@ class MainPage extends StatelessWidget {
                 ),
 
                 IconButton(
-                  tooltip: "Zatrzymaj akcje robota",
+                  tooltip: S?.of(context)?.tooltipStopActions ?? "",
                   icon: Icon(MdiIcons.stop,
                       // size: 30,
                       color: Theme.of(context).brightness == Brightness.light
@@ -71,7 +82,7 @@ class MainPage extends StatelessWidget {
                 ),
 
                 IconButton(
-                    tooltip: "Ustawienia",
+                    tooltip: S?.of(context)?.tooltipSettings ?? "",
                     icon: Icon(MdiIcons.cog,
                         color: Theme.of(context).brightness == Brightness.light
                             ? Colors.black54
@@ -150,7 +161,8 @@ class MainPage extends StatelessWidget {
           bottomNavigationBar: MediaQuery.of(context).orientation ==
                   Orientation.portrait
               ? Consumer2<AppStateProvider, SettingsProvider>(
-                  builder: (BuildContext context, appStateProvider, settingsProvider, Widget child) =>
+                  builder: (BuildContext context, appStateProvider,
+                          settingsProvider, Widget child) =>
                       BottomNavigationBar(
                           currentIndex: appStateProvider.activePageIndex,
                           backgroundColor: Theme.of(context).canvasColor,
@@ -173,17 +185,17 @@ class MainPage extends StatelessWidget {
                                   : Colors.white,
                           items: [
                             BottomNavigationBarItem(
-                              label: 'Czat',
+                              label: S?.of(context)?.pageChatTitle ?? "",
                               icon: Icon(Icons.chat_sharp),
                             ),
                             BottomNavigationBarItem(
                               icon: Icon(MdiIcons.gamepadUp),
-                              label: 'Sterowanie',
+                              label: S?.of(context)?.pageControllerTitle ?? "",
                             ),
                             BottomNavigationBarItem(
                               // icon: Icon(MdiIcons.mapMarkerDistance), title: Text("Mapa")),
                               icon: Icon(MdiIcons.earthBox),
-                              label: 'Mapa',
+                              label: S?.of(context)?.pageMapTitle ?? "",
                             ),
                           ],
                           onTap: (index) {
@@ -196,8 +208,7 @@ class MainPage extends StatelessWidget {
                           }))
               : SizedBox(),
           body: Consumer<AppStateProvider>(
-              builder: (context, appStateProvider, child) =>
-                  appStateProvider.appPages[appStateProvider.activePageIndex])),
+              builder: (context, provider, child) => appPages[provider.activePageIndex])),
     );
   }
 }

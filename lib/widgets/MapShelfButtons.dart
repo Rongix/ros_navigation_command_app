@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/providers/RosProvider.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class MapShelfButtons extends StatelessWidget {
       Consumer2<SettingsProvider, RosProvider>(
           builder: (context, settingsProvider, rosProvider, child) =>
               FloatingActionButton(
-                  tooltip: 'Pokaż/ukryj siatkę',
+                  tooltip: S?.of(context)?.pageMapButtonGrid,
                   backgroundColor: Theme.of(context).chipTheme.backgroundColor,
                   elevation: Provider.of<RosProvider>(context).mapImageAvailable
                       ? null

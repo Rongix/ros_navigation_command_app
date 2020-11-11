@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
 import 'package:chatapp/widgets/ShadowLine.dart';
 import 'package:flutter/material.dart';
@@ -31,16 +32,8 @@ class SettingsPageNew extends StatelessWidget {
                 MediaQuery.of(context).orientation == Orientation.portrait
                     ? 50
                     : 40,
-            leading: IconButton(
-              onPressed: () {
-                Provider.of<SettingsProvider>(context, listen: false)
-                    .savePrefs();
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.chevron_left),
-            ),
             backgroundColor: Theme.of(context).canvasColor,
-            title: Text("Ustawienia"),
+            title: Text(S?.of(context)?.pageSettingsTitle ?? ""),
           ),
           body: ListView(
             physics: Provider.of<SettingsProvider>(context, listen: false)
@@ -53,8 +46,10 @@ class SettingsPageNew extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(Icons.apps),
                   ),
-                  title: Text('Ustawienia aplikacji'),
-                  subtitle: Text('Ogólne ustawienia i akcesyjność')),
+                  title:
+                      Text(S?.of(context)?.pageSettingsGeneral("title") ?? ""),
+                  subtitle:
+                      Text(S?.of(context)?.pageSettingsGeneral("desc") ?? "")),
               Consumer<SettingsProvider>(
                 builder: (context, settingsProvider, child) => RadioListTile(
                   groupValue: settingsProvider.appTheme,
@@ -62,7 +57,8 @@ class SettingsPageNew extends StatelessWidget {
                   onChanged: (value) {
                     settingsProvider.setTheme(value);
                   },
-                  title: Text("Jasny motyw"),
+                  title:
+                      Text(S?.of(context)?.pageSettingsThemes("light") ?? ""),
                   value: ThemeMode.light,
                 ),
               ),
@@ -73,7 +69,7 @@ class SettingsPageNew extends StatelessWidget {
                   onChanged: (value) {
                     settingsProvider.setTheme(value);
                   },
-                  title: Text("Ciemny motyw"),
+                  title: Text(S?.of(context)?.pageSettingsThemes("dark") ?? ""),
                   value: ThemeMode.dark,
                 ),
               ),
@@ -84,7 +80,8 @@ class SettingsPageNew extends StatelessWidget {
                   onChanged: (value) {
                     settingsProvider.setTheme(value);
                   },
-                  title: Text("Systemowy motyw"),
+                  title:
+                      Text(S?.of(context)?.pageSettingsThemes("system") ?? ""),
                   value: ThemeMode.system,
                 ),
               ),
@@ -98,8 +95,10 @@ class SettingsPageNew extends StatelessWidget {
                     settingsProvider
                         .setLimitAnimations(!settingsProvider.limitAnimations);
                   },
-                  title: Text('Ogranicz animacje'),
-                  subtitle: Text('Zmienia zachowanie list, wiadomości'),
+                  title: Text(
+                      S?.of(context)?.pageSettingsAnimations("title") ?? ""),
+                  subtitle: Text(
+                      S?.of(context)?.pageSettingsAnimations("desc") ?? ""),
                   trailing: Switch(
                     activeColor: Theme.of(context).accentColor,
                     value: settingsProvider.limitAnimations,
@@ -119,8 +118,10 @@ class SettingsPageNew extends StatelessWidget {
                     settingsProvider.setShowNavigationBarLabels(
                         !settingsProvider.showNavigationBarLabels);
                   },
-                  title: Text('Podpisy przycisków'),
-                  subtitle: Text('Dodaje podpisy pod przyciskami nawigacji'),
+                  title: Text(
+                      S?.of(context)?.pageSettingsButtonsDesc("title") ?? ""),
+                  subtitle: Text(
+                      S?.of(context)?.pageSettingsButtonsDesc("desc") ?? ""),
                   trailing: Switch(
                     activeColor: Theme.of(context).accentColor,
                     value: settingsProvider.showNavigationBarLabels,
@@ -136,12 +137,12 @@ class SettingsPageNew extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(MdiIcons.desktopTower),
                   ),
-                  title: Text('Konfiguracja ROS'),
-                  subtitle: Text(
-                      'Konfiguracja sieciowa ROS, należy wprowadzić adres urządzenia roscore i adres ip aktualnego urządzenia')),
+                  title: Text(S?.of(context)?.pageSettingsRos("title") ?? ""),
+                  subtitle:
+                      Text(S?.of(context)?.pageSettingsRos("desc") ?? "")),
               ListTileTextField(
                 icon: Icon(MdiIcons.server),
-                title: Text('Główny serwer (IP)'),
+                title: Text(S?.of(context)?.pageSettingsRosMain ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setIpAdressMainServer(str);
@@ -152,7 +153,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.devices),
-                title: Text('To urządzenie (IP)'),
+                title: Text(S?.of(context)?.pageSettingsRosDevice ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setIpAdressDevice(str);
@@ -163,7 +164,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.cube),
-                title: Text('Odometria robota'),
+                title: Text(S?.of(context)?.pageSettingsRosOdom ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setTopicOdometry(str);
@@ -174,7 +175,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.camera),
-                title: Text('Kamera'),
+                title: Text(S?.of(context)?.pageSettingsRosCamera ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setTopicCamera(str);
@@ -185,7 +186,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.battery),
-                title: Text('Bateria'),
+                title: Text(S?.of(context)?.pageSettingsRosBattery ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setTopicBattery(str);
@@ -196,7 +197,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.speedometer),
-                title: Text('Prędkość liniowa / kątowa silników'),
+                title: Text(S?.of(context)?.pageSettingsRosVelocity ?? ""),
                 onChanged: (str) {
                   Provider.of<SettingsProvider>(context, listen: false)
                       .setTopicVelocity(str);
@@ -207,7 +208,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.earthBox),
-                title: Text('Mapa'),
+                title: Text(S?.of(context)?.pageSettingsRosMap ?? ""),
                 textfieldcontroller: TextEditingController()
                   ..text = Provider.of<SettingsProvider>(context, listen: false)
                       .topicMap,
@@ -218,7 +219,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.navigation),
-                title: Text('Nawigacja / Cel'),
+                title: Text(S?.of(context)?.pageSettingsRosNavigation ?? ""),
                 textfieldcontroller: TextEditingController()
                   ..text = Provider.of<SettingsProvider>(context, listen: false)
                       .topicNavigation,
@@ -229,7 +230,7 @@ class SettingsPageNew extends StatelessWidget {
               ),
               ListTileTextField(
                 icon: Icon(MdiIcons.chat),
-                title: Text('Chatter'),
+                title: Text(S?.of(context)?.pageSettingsRosChatter ?? ""),
                 textfieldcontroller: TextEditingController()
                   ..text = Provider.of<SettingsProvider>(context, listen: false)
                       .topicChatter,
@@ -244,8 +245,10 @@ class SettingsPageNew extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.info),
                 ),
-                title: Text('O aplikacji'),
-                subtitle: Text('Licencje'),
+                title: Text(S?.of(context)?.pageSettingsAbout ?? ""),
+                subtitle: Text(
+                  MaterialLocalizations.of(context).licensesPageTitle,
+                ),
                 onTap: () {
                   showAppInfo(context);
                 },

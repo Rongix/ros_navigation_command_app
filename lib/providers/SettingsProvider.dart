@@ -173,11 +173,10 @@ class SettingsProvider extends ChangeNotifier {
       // Waypoints from sample turtlebot3 home 3d simulated environmental map, based on true storry
       _waypoints = localAppStorage.getItem('waypoints') ??
           WaypointList([
-            Waypoint(name: 'kuchnia', color: Colors.green, x: 6, y: -1),
-            Waypoint(
-                name: 'pokój gościnny', color: Colors.yellow, x: 2.9, y: 2.3),
-            Waypoint(name: 'sypialnia', color: Colors.pink, x: -6, y: 3.11),
-            Waypoint(name: 'łazienka', color: Colors.blue, x: 1, y: 2.6),
+            Waypoint(name: 'K', color: Colors.green, x: 6, y: -1),
+            Waypoint(name: 'PG', color: Colors.yellow, x: 2.9, y: 2.3),
+            Waypoint(name: 'S', color: Colors.pink, x: -6, y: 3.11),
+            Waypoint(name: 'L', color: Colors.blue, x: 1, y: 2.6),
           ]);
 
       _localAppStorageInitialized = true;

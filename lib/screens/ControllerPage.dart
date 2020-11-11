@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/providers/RosProvider.dart';
 import 'package:chatapp/providers/SettingsProvider.dart';
 import 'package:chatapp/widgets/RainbowCircularIndicator.dart';
@@ -35,7 +36,7 @@ class ControllerPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Czekam na obraz z kamery",
+                            Text(S?.of(context)?.pageControllerInfoTitle,
                                 style: Theme.of(context).textTheme.subtitle1,
                                 textAlign: TextAlign.center),
                             Text('${settingsProvider.topicCamera}',

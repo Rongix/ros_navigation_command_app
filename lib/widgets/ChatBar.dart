@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/models/Message.dart';
 import 'package:chatapp/providers/AudioProvider.dart';
 import 'package:chatapp/providers/ChatInfoProvider.dart';
@@ -46,8 +47,8 @@ class ChatBar extends StatelessWidget {
                               left: 85, right: 95, top: 17, bottom: 0),
                           filled: true,
                           hintText: audioProvider.isRecording
-                              ? "Nagrywam..."
-                              : "Polecenie",
+                              ? S?.of(context)?.pageChatRecording ?? ""
+                              : S?.of(context)?.pageChatTexting ?? "",
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
@@ -81,7 +82,7 @@ class ChatBar extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Tooltip(
-                            message: "Typ wprowadzania polecenia (tekst)",
+                            message: S?.of(context)?.tooltipChatMode ?? "",
                             child: audioProvider.isRecording
                                 ? IconButton(
                                     visualDensity: VisualDensity.compact,
@@ -97,7 +98,7 @@ class ChatBar extends StatelessWidget {
                                   ),
                           ),
                           Tooltip(
-                            message: "Szybkie odpowiedzi",
+                            message: S?.of(context)?.tooltipChatStar ?? "",
                             child: IconButton(
                               visualDensity: VisualDensity.compact,
                               icon: chatInfoProvider.favoriteShelfOpen
