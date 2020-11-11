@@ -22,7 +22,8 @@ Chat page provides communication with Dialogflow Agent.
 <img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200824-180256.jpg" width="20%" height="20%"> <img src="https://github.com/Rongix/ros_navigation_command_app/blob/main/Screenshot_20200824-180154.jpg" width="20%" height="20%">    
 
 ### Internatiolization & language support
-This app is not internationalized, there are some UI hardcoded strings in polish, sorry for any inconvenience! It uses polish dialogflow intents so it may be tricky to get it running flawlessly.
+~~This app is not internationalized, there are some UI hardcoded strings in polish, sorry for any inconvenience! It uses polish dialogflow intents so it may be tricky to get it running flawlessly~~.
+This app has english and polish versions (no dialogflow agent included)
 
 ## Getting started:
 You need to have ROS installed. App was tested with Turtlebot3 Waffle Pi in the simulation environment, althought it can work with any robot. You can quickly set topics and configurate ROS in the app settings. 
