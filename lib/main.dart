@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'generated/l10n.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:chatapp/providers/AppStateProvider.dart';
 import 'package:chatapp/providers/AudioProvider.dart';
 import 'package:chatapp/providers/ChatInfoProvider.dart';
@@ -14,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
     ChangeNotifierProvider(create: (_) => ChatInfoProvider()),
@@ -84,6 +88,13 @@ class _MyAppState extends State<MyApp> {
 
   Widget mainApp(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Voice App',
       themeMode: Provider.of<SettingsProvider>(context, listen: true).appTheme,

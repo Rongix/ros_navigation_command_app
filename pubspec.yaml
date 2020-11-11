@@ -29,25 +29,21 @@ dependencies:
   basic_utils: ^2.5.3
   material_design_icons_flutter: ^4.0.5345
   shared_preferences: ^0.5.8
-  ros_nodes: 
-    git: 
+  ros_nodes:
+    git:
       url: git://github.com/Sashiri/ros_nodes.git
   localstorage: ^3.0.0
   flutter_colorpicker: ^0.3.4
   english_words: ^3.1.5
-    
+  flutter_localizations:
+    sdk: flutter
 
-
-
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -61,13 +57,10 @@ flutter:
     - assets/dialogflowapi.json
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -87,3 +80,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true
