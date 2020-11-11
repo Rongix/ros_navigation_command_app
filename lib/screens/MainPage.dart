@@ -38,8 +38,8 @@ class MainPage extends StatelessWidget {
               bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(0), child: ShadowLine()),
               toolbarHeight: MediaQuery.of(context).orientation == Orientation.portrait
-                  ? 50
-                  : 40,
+                  ? null
+                  : 45,
               title: Consumer<AppStateProvider>(
                 builder: (context, myType, child) => Text(
                     appPagesNames[

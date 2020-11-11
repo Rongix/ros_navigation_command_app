@@ -21,8 +21,8 @@ class SettingsPage extends StatelessWidget {
         appBar: AppBar(
           toolbarHeight:
               MediaQuery.of(context).orientation == Orientation.portrait
-                  ? 50
-                  : 40,
+                  ? null
+                  : 45,
           leading: IconButton(
             onPressed: () {
               Provider.of<SettingsProvider>(context, listen: false).savePrefs();

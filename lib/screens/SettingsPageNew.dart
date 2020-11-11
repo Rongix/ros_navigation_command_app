@@ -30,8 +30,8 @@ class SettingsPageNew extends StatelessWidget {
                 preferredSize: const Size.fromHeight(0), child: ShadowLine()),
             toolbarHeight:
                 MediaQuery.of(context).orientation == Orientation.portrait
-                    ? 50
-                    : 40,
+                    ? null
+                    : 45,
             backgroundColor: Theme.of(context).canvasColor,
             title: Text(S?.of(context)?.pageSettingsTitle ?? ""),
           ),
