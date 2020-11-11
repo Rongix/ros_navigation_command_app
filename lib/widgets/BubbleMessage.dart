@@ -57,10 +57,12 @@ class _BubbleMessageState extends State<BubbleMessage>
     return slideIn(Builder(
       builder: (_) {
         var textTheme = Theme.of(context).textTheme.caption;
-        var fulfilled =
-            widget.message.aiResponse.queryResult.allRequiredParamsPresent;
+        var fulfilled = widget
+                ?.message?.aiResponse?.queryResult?.allRequiredParamsPresent ??
+            false;
         var intentType =
-            widget.message.aiResponse.queryResult.intent.displayName;
+            widget?.message?.aiResponse?.queryResult?.intent?.displayName ??
+                "Error";
         fulfilled ??= false;
 
         var status = fulfilled
@@ -75,14 +77,17 @@ class _BubbleMessageState extends State<BubbleMessage>
                 avatar:
                     Icon(MdiIcons.checkBold, color: Colors.greenAccent[400]),
               )
-            : Chip(
-                shape: StadiumBorder(
-                    side: BorderSide(
-                        width: 0.5, color: Colors.red[400].withOpacity(0.5))),
-                backgroundColor: Theme.of(context).canvasColor,
-                visualDensity: VisualDensity.compact,
-                label: Text("Czekam na parametry", style: textTheme),
-                avatar: Icon(MdiIcons.timelapse, color: Colors.red[400]));
+            : intentType == "Error"
+                ? SizedBox()
+                : Chip(
+                    shape: StadiumBorder(
+                        side: BorderSide(
+                            width: 0.5,
+                            color: Colors.red[400].withOpacity(0.5))),
+                    backgroundColor: Theme.of(context).canvasColor,
+                    visualDensity: VisualDensity.compact,
+                    label: Text("Czekam na parametry", style: textTheme),
+                    avatar: Icon(MdiIcons.timelapse, color: Colors.red[400]));
         var intentTypeChip = Chip(
           shape: StadiumBorder(
               side: BorderSide(
@@ -100,9 +105,9 @@ class _BubbleMessageState extends State<BubbleMessage>
           intentTypeChip,
         ];
 
-        var params = widget.message.aiResponse.queryResult.parameters;
+        var params = widget?.message?.aiResponse?.queryResult?.parameters;
 
-        params.forEach(
+        params?.forEach(
           (k, v) {
             // k = StringUtils.capitalize(k);
             v = v.toString();
@@ -233,7 +238,7 @@ class _BubbleMessageState extends State<BubbleMessage>
                         MessageBody(widget: widget),
                         //Play stop icon for bot
                         widget.message.sender == Sender.bot &&
-                                widget.message.aiResponse.outputAudio != null
+                                widget?.message?.aiResponse?.outputAudio != null
                             ? Consumer<AudioProvider>(
                                 builder: (context, provider, child) =>
                                     AnimatedSwitcher(

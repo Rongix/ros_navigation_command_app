@@ -41,6 +41,11 @@ class CustomAIResponse extends AIResponse {
     suggestions = List<Map>.from(richResponse ?? const []);
     outputAudio = body['outputAudio'];
   }
+
+  CustomAIResponse.fromParams(String suggestions, String outputAudio) {
+    suggestions = suggestions;
+    outputAudio = outputAudio;
+  }
 }
 
 class AudioDialogFlow extends Dialogflow {

@@ -10,6 +10,7 @@ import 'package:chatapp/providers/RosProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class ChatBar extends StatelessWidget {
@@ -148,56 +149,76 @@ class ChatBar extends StatelessWidget {
                                         AudioProvider audioProvider,
                                         Widget child) {
                                       return GestureDetector(
-                                        onLongPress: () {
+                                        onLongPress: () async {
+                                          var status = await Permission
+                                              .microphone.status;
                                           print(
                                               "looooooong -> record -> start");
-                                          audioProvider.start();
+                                          if (status.isPermanentlyDenied) {
+                                            return;
+                                          } else if (status.isUndetermined ||
+                                              status.isDenied) {
+                                            await Permission.microphone
+                                                .request();
+                                          } else if (status.isGranted) {
+                                            audioProvider.start();
+                                          }
                                         },
                                         onLongPressUp: () async {
-                                          print("looong up -> record -> stop");
-                                          var response =
-                                              await audioProvider.stop();
-                                          var content =
-                                              await File(response.path)
-                                                  .readAsBytes();
+                                          _audioMessageBack() async {
+                                            print(
+                                                "looong up -> record -> stop");
+                                            var response =
+                                                await audioProvider.stop();
+                                            var content =
+                                                await File(response.path)
+                                                    .readAsBytes();
 
-                                          // print(content);
+                                            chatInfoProvider.addMessage(
+                                                message: Message(
+                                                    body:
+                                                        "Wiadomość głosowa bez transkrypcji",
+                                                    sender: Sender.user,
+                                                    voiceActing: response));
 
-                                          chatInfoProvider.addMessage(
-                                              message: Message(
-                                                  body:
-                                                      "Wiadomość głosowa bez transkrypcji",
-                                                  sender: Sender.user,
-                                                  voiceActing: response));
+                                            var aiResponse = await Provider.of<
+                                                        DialogflowProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .response(
+                                                    base64.encode(content),
+                                                    isAudio: true);
 
-                                          // final Soundpool pool = Soundpool();
-                                          // pool.release();
-                                          // final soundId =
-                                          //     await pool.loadUint8List(content);
+                                            chatInfoProvider.addMessage(
+                                                message: Message(
+                                                    body:
+                                                        aiResponse.getMessage(),
+                                                    sender: Sender.bot,
+                                                    aiResponse: aiResponse));
+                                            chatInfoProvider
+                                                .updateLastVoiceMessageDescription(
+                                                    aiResponse
+                                                        .queryResult.queryText);
 
-                                          // pool.play(soundId);
+                                            //Supply response to matching Intent (to get action done)
+                                            Provider.of<RosProvider>(context,
+                                                    listen: false)
+                                                .matchIntent(
+                                                    aiResponse, context);
+                                          }
 
-                                          var aiResponse = await Provider.of<
-                                                      DialogflowProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .response(base64.encode(content),
-                                                  isAudio: true);
+                                          var status = await Permission
+                                              .microphone.status;
 
-                                          chatInfoProvider.addMessage(
-                                              message: Message(
-                                                  body: aiResponse.getMessage(),
-                                                  sender: Sender.bot,
-                                                  aiResponse: aiResponse));
-                                          chatInfoProvider
-                                              .updateLastVoiceMessageDescription(
-                                                  aiResponse
-                                                      .queryResult.queryText);
-
-                                          //Supply response to matching Intent (to get action done)
-                                          Provider.of<RosProvider>(context,
-                                                  listen: false)
-                                              .matchIntent(aiResponse, context);
+                                          if (status.isPermanentlyDenied) {
+                                            return;
+                                          } else if (status.isUndetermined ||
+                                              status.isDenied) {
+                                            await Permission.microphone
+                                                .request();
+                                          } else if (status.isGranted) {
+                                            _audioMessageBack();
+                                          }
                                         },
                                         child: IconButton(
                                             icon: Icon(Icons.mic),
@@ -273,6 +294,30 @@ void pushAiResponse(BuildContext context, String query) {
     //Supply response to matching Intent (to get action done)
     Provider.of<RosProvider>(context, listen: false)
         .matchIntent(response, context);
+  }).catchError((err) {
+    switch (err.toString()) {
+      case "Unable to load asset: assets/dialogflowapi.json":
+        _errMissingApiKey(context, err);
+        break;
+      default:
+        _errDefault(context, err);
+        break;
+    }
   });
-  //Supply response to matching Intent (to get action done)
+}
+
+_errMissingApiKey(context, err) {
+  Provider.of<ChatInfoProvider>(context, listen: false).addMessage(
+      message: Message(
+    body: "Arr! Api key missing :/",
+    sender: Sender.bot,
+  ));
+}
+
+_errDefault(context, err) {
+  Provider.of<ChatInfoProvider>(context, listen: false).addMessage(
+      message: Message(
+    body: "Arr! Something went wrong, sorry :/",
+    sender: Sender.bot,
+  ));
 }

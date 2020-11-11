@@ -1,3 +1,4 @@
+import 'package:chatapp/generated/l10n.dart';
 import 'package:chatapp/models/Message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,25 +15,25 @@ class ChatInfoProvider extends ChangeNotifier {
   var _listKey = GlobalKey<AnimatedListState>();
   List<Message> _messages = [
     Message(
-        heading: 'Witaj',
+        heading: "Hello",
         body:
-            'W tym oknie możesz prowadzić rozmowę z robotem asystentem. Aby rozpocząć:',
+            'Voice and chat commands are disabled by default in this app version. You can issue commands in controller and map pages. Your actions will show below',
         sender: Sender.system,
         actions: [
-          IconWithDescription(
-              onTap: () {
-                print('aaa');
-              },
-              icon: MdiIcons.textShort,
-              description:
-                  'Naciśnij ikonę tekstu lub kliknij pole "Polecenie"'),
-          IconWithDescription(
-              onTap: () {
-                print('aaa');
-              },
-              icon: Icons.mic,
-              description:
-                  'Trzymaj ikonę mikrofonu aby nagrać wiadomość głosową'),
+          // IconWithDescription(
+          //     onTap: () {
+          //       print('aaa');
+          //     },
+          //     icon: MdiIcons.textShort,
+          //     description:
+          //         'Naciśnij ikonę tekstu lub kliknij pole "Polecenie"'),
+          // IconWithDescription(
+          //     onTap: () {
+          //       print('aaa');
+          //     },
+          //     icon: Icons.mic,
+          //     description:
+          //         'Trzymaj ikonę mikrofonu aby nagrać wiadomość głosową'),
         ])
   ];
 

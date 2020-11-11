@@ -37,6 +37,7 @@ dependencies:
   english_words: ^3.1.5
   flutter_localizations:
     sdk: flutter
+  permission_handler: ^5.0.1+1
 
 dev_dependencies:
   flutter_test:
