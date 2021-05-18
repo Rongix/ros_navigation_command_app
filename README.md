@@ -1,6 +1,8 @@
 # ros_command_app
 Application for controlling ROS robot with voice commands, sending goals on map or remote controll with virtual joystick
-29.03.2020
+29.03.2020 
+
+Please note that I made this app as a beginner (~29.03.2020), there are some mistakes and bad practices that should be changed, architecture / state management is also not great.
 
 Check out youtube video showcasing app (PL + ENG subtitles):
 
