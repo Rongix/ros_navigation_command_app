@@ -2,7 +2,7 @@
 Application for controlling ROS robot with voice commands, sending goals on map or remote controll with virtual joystick
 29.03.2020 
 
-Please note that I made this app as a beginner (~29.03.2020), there are some mistakes and bad practices that should be changed, architecture / state management is also not great.
+Please note that I made this app as a beginner (~29.03.2020), there are some mistakes and bad practices that should be changed, architecture / state management is also not great. It serves as a demo and the starter point for anyone interested in ROS + Flutter, please keep in mind that it is unlikely that the repository will be updated and / or activelly updated. Sorry for the inconvenience and unresolved issues. 
 
 Check out youtube video showcasing app (PL + ENG subtitles):
 
